@@ -1,12 +1,12 @@
 #!/usr/local/bin/perl
-# Time-stamp: "1999-01-23 12:58:02 MST" -*-Perl-*-
+# Time-stamp: "1999-05-14 13:34:09 MDT" -*-Perl-*-
 
 package Class::ISA;
 require 5;
 use strict;
 use vars qw($Debug $VERSION);
-$VERSION = 0.20;
-$Debug = 0;
+$VERSION = 0.31;
+$Debug = 0 unless defined $Debug;
 
 =head1 NAME
 
@@ -135,7 +135,7 @@ it under the same terms as Perl itself.
 
 =head1 AUTHOR
 
-Sean M. Burke <sburke@netadventure.net>
+Sean M. Burke C<sburke@netadventure.net>
 
 =cut
 
@@ -180,42 +180,33 @@ sub self_and_super_path {
   # Note: 'UNIVERSAL' is not given any special treatment.
   return () unless @_;
 
-  my @arg = @_; # copy, since we're a function
-  my $seen_r;
-  if(ref($arg[0]) eq 'Class::ISA::_TRACKER'){ # it's my $seen_r
-    print "Found seen_r in \@_: $arg[0]\n" if $Debug > 1;
-    $seen_r = shift(@arg);
-  } else {
-    $seen_r = bless { '' => [] }, 'Class::ISA::_TRACKER';
-    print "Making a new seen_r: $seen_r\n" if $Debug;
-  }
-   # use '' for a stack of things to return
+  my @out = ();
 
-  foreach my $package (@arg) {
-    $package = ref($package) || $package;
+  my @in_stack = ($_[0]);
+  my %seen = ($_[0] => 1);
 
-    print "$package\: Seen_r: $seen_r (",
-          scalar(keys %$seen_r),
-          ") keys so far.\nRet stack so far: ", $seen_r->{''},
-          "[", @{$seen_r->{''}} , "]\n" if $Debug > 1;
-
-    return() unless length($package);
-    substr($package,0,2) = "main::" if substr($package,0,2) eq '::';
-     # canonize the "main::" == "::" thing.
-
-    unless($seen_r->{$package}++) {
-      no strict 'refs';
-      print "$package: Pushing $package to the return list ",
-       $seen_r->{''}, "\n" if $Debug;
-      push(@{$seen_r->{''}}, $package);
-
-      if(defined(@{$package . "::ISA"}) && @{$package . "::ISA"}) {
-        &self_and_super_path($seen_r, @{$package . "::ISA"}); # recurse!
-      } # note that I don't need the ret value here.
-    }
+  my $current;
+  while(@in_stack) {
+    next unless defined($current = shift @in_stack) && length($current);
+    print "At $current\n" if $Debug;
+    push @out, $current;
+    no strict 'refs';
+    unshift @in_stack,
+      map
+        { my $c = $_; # copy, to avoid being destructive
+          substr($c,0,2) = "main::" if substr($c,0,2) eq '::';
+           # Canonize the :: -> main::, ::foo -> main::foo thing.
+           # Should I ever canonize the Foo'Bar = Foo::Bar thing? 
+          $seen{$c}++ ? () : $c;
+        }
+        @{"$current\::ISA"}
+    ;
+    # I.e., if this class has any parents (at least, ones I've never seen
+    # before), push them, in order, onto the stack of classes I need to
+    # explore.
   }
 
-  return @{$seen_r->{''}};
+  return @out;
 }
 #--------------------------------------------------------------------------
 1;
