@@ -1,11 +1,11 @@
 #!/usr/local/bin/perl
-# Time-stamp: "1999-05-14 13:34:09 MDT" -*-Perl-*-
+# Time-stamp: "2000-05-13 20:03:22 MDT" -*-Perl-*-
 
 package Class::ISA;
 require 5;
 use strict;
 use vars qw($Debug $VERSION);
-$VERSION = 0.31;
+$VERSION = 0.32;
 $Debug = 0 unless defined $Debug;
 
 =head1 NAME
@@ -128,14 +128,14 @@ of your mind!
 
 =head1 COPYRIGHT
 
-Copyright (c) 1999 Sean M. Burke. All rights reserved.
+Copyright (c) 1999, 2000 Sean M. Burke. All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =head1 AUTHOR
 
-Sean M. Burke C<sburke@netadventure.net>
+Sean M. Burke C<sburke@cpan.org>
 
 =cut
 

@@ -1,10 +1,11 @@
 Revision history for Perl extension Class::ISA
-                                        Time-stamp: "1999-05-14 13:33:44 MDT"
+                                        Time-stamp: "2000-05-13 20:31:28 MDT"
 
-1999-01-23  Sean M. Burke  sburke@netadventure.net
+2000-05-13  Sean M. Burke  sburke@netadventure.net
 
-	* Release 0.20 -- first release version.
+	* Release 0.32 -- Just noting my new email address.
 
+	
 1999-05-14  Sean M. Burke  sburke@netadventure.net
 
 	* Release 0.31 -- release version.
@@ -12,3 +13,7 @@ Revision history for Perl extension Class::ISA
 	No changes in functionality -- just changed the core algorithm to
 	something that should behave the same, but is cleaner and faster.
 
+
+1999-01-23  Sean M. Burke  sburke@netadventure.net
+
+	* Release 0.20 -- first release version.

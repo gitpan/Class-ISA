@@ -1,5 +1,5 @@
 README for Class::ISA
-                                        Time-stamp: "1999-01-23 13:07:00 MST"
+                                        Time-stamp: "2000-05-13 20:01:35 MDT"
 
 NAME
     Class::ISA -- report the search path for a class's ISA tree
@@ -108,13 +108,13 @@ CAUTIONARY NOTES
     mind!
 
 COPYRIGHT
-    Copyright (c) 1999 Sean M. Burke. All rights reserved.
+    Copyright (c) 1999, 2000 Sean M. Burke. All rights reserved.
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
 
 AUTHOR
-    Sean M. Burke <sburke@netadventure.net>
+    Sean M. Burke <sburke@cpan.org>
 
 
 PREREQUISITES
@@ -157,7 +157,7 @@ MacPerl site_lib or lib directory, and move ISA.pm into there.
 SUPPORT
 
 Questions, bug reports, useful code bits, and suggestions for
-Class::ISA should just be sent to me at sburke@netadventure.net
+Class::ISA should just be sent to me at sburke@cpan.org
 
 
 AVAILABILITY
