@@ -1,7 +1,7 @@
 ChangeLog
 lib/Class/ISA.pm
 Makefile.PL
-MANIFEST
+MANIFEST			This list of files
 MANIFEST.SKIP
 README
 t/00_about_verbose.t
